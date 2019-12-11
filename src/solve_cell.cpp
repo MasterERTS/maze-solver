@@ -27,8 +27,36 @@ public:
         // this method should return  all positions reachable from this one
         std::vector<PositionPtr> generated;
 
+        // Create new variables for Position, to prevent modifying the current node
+        int new_x;
+        int new_y;
+        
+        // Loop through four neighbours since we move cell after cell
+        for (int i = 0 ; i < 4 ; i++) {
+            switch(i) {
+                case(0):
+                    new_x = x + 1;
+                    new_y = y;
+                    break;
+                case(1):
+                    new_x = x - 1;
+                    new_y = y;
+                    break;
+                case(2):
+                    new_y = y + 1;
+                    new_x = x;
+                    break;
+                case(3):
+                    new_y = y - 1;
+                    new_x = x;
+                    break;
+            }
 
-
+            // If the cell is a free cell, add it to the vector.
+            if (maze.isFree(new_x, new_y)) {
+                generated.push_back(std::make_unique<Position>(new_x, new_y));
+            }
+        }
         return generated;
     }
 };
