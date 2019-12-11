@@ -25,11 +25,6 @@ public:
         return m_distance;
     }
 
-    /**
-     * issue : it seems like it goes through walls, even though
-     * it is supposed to go out of the distance iterator as soon as it meets a wall
-     *  weird ?
-     */
     std::vector<PositionPtr> children()
     {
         // this method should return  all positions reachable from this one
