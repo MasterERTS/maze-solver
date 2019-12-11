@@ -17,7 +17,7 @@ public:
     Position(int _x, int _y, int _distance = 1) : Point(_x, _y), m_distance(_distance) {}
 
     // constructor from base ecn::Point
-    Position(ecn::Point p, int _distance = 1) : Point(p.x, p.y), m_distance(_distance) {}
+    Position(ecn::Point p) : Point(p.x, p.y) {}
 
     int distToParent()
     {
