@@ -14,10 +14,10 @@ private:
 
 public:
     // constructor from coordinates
-    Position(int _x, int _y, int _distance) : Point(_x, _y), m_distance(_distance) {}
+    Position(int _x, int _y, int _distance = 1) : Point(_x, _y), m_distance(_distance) {}
 
     // constructor from base ecn::Point
-    Position(ecn::Point p) : Point(p.x, p.y) {}
+    Position(ecn::Point p, int _distance = 1) : Point(p.x, p.y), m_distance(_distance) {}
 
     int distToParent()
     {
@@ -38,7 +38,7 @@ public:
         // Create new variables for Position, to prevent modifying the current node
         int new_x;
         int new_y;
-        int distance = 1;
+        int distance;
         
         // Loop through four DIRECTIONS and loop until a wall is met in each direction
         for (int i = 0 ; i < 4 ; i++) {
@@ -49,10 +49,10 @@ public:
                     new_y = y;
                     if(!maze.isFree(new_x, new_y)) break;
                     while (maze.isFree(new_x, new_y)) {
-                        new_x = new_x + distance;
+                        new_x = new_x + 1;
                         distance++;
                     }
-                    generated.push_back(std::make_unique<Position>(new_x - 1, new_y, distance - 1));
+                    generated.push_back(std::make_unique<Position>(x + 1, y, distance - 1));
                     break;
                 case(1):
                     distance = 1;
@@ -60,10 +60,10 @@ public:
                     new_y = y;
                     if(!maze.isFree(new_x, new_y)) break;
                     while (maze.isFree(new_x, new_y)) {
-                        new_x = new_x - distance;
+                        new_x = new_x - 1;
                         distance++;
                     }
-                    generated.push_back(std::make_unique<Position>(new_x + 1, new_y, distance - 1));
+                    generated.push_back(std::make_unique<Position>(x - 1, y, distance - 1));
                     break;
                 case(2):
                     distance = 1;
@@ -71,10 +71,10 @@ public:
                     new_y = y + distance;
                     if(!maze.isFree(new_x, new_y)) break;
                     while (maze.isFree(new_x, new_y)) {
-                        new_y = new_y + distance;
+                        new_y = new_y + 1;
                         distance++;
                     }
-                    generated.push_back(std::make_unique<Position>(new_x, new_y - 1, distance - 1));
+                    generated.push_back(std::make_unique<Position>(x, y + 1, distance - 1));
                     break;
                 case(3):
                     distance = 1;
@@ -82,10 +82,10 @@ public:
                     new_y = y - distance;
                     if(!maze.isFree(new_x, new_y)) break;
                     while (maze.isFree(new_x, new_y)) {
-                        new_y = new_y - distance;
+                        new_y = new_y - 1;
                         distance++;
                     }
-                    generated.push_back(std::make_unique<Position>(new_x, new_y + 1, distance - 1));
+                    generated.push_back(std::make_unique<Position>(x, y - 1, distance - 1));
                     break;
             }
         }
