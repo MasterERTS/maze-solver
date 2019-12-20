@@ -22,3 +22,14 @@ Here the children should be generated so that any corridor is directly followed 
 can only be intersections or dead-ends, but not simple corners).
 For this one, since by construction the nodes can only be intersections or dead-end AND the starting and goal positions may be in the middle of a corridor.
 It is necessary to add checks. ( and to reimplement the Point::show and Point::print methods )
+
+# Run
+
+In working directory :
+```
+$ cmake .
+$ make
+$ ./build/cell
+$ ./build/line
+$ ./build/corridor
+```
